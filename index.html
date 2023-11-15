@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+   
+    <script src="main.js" type="module" defer></script>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top p-0 bg-dark">
+            <div class="container-fluid">
+                <img src="https://cdn-icons-png.flaticon.com/128/477/477702.png" alt="logo" width="70px">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">
+                                <figure class="d-flex align-items-center">
+                                    <i class="flag-icon flag-icon-us" style="margin-right: 5px;"></i>
+                                    <span>USA</span>
+                                </figure>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <figure class="d-flex align-items-center">
+                                    <i class="flag-icon flag-icon-il" style="margin-right: 5px;"></i>
+                                    <span>ISRAEL</span>
+                                </figure>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <figure class="d-flex align-items-center">
+                                    <i class="flag-icon flag-icon-gb" style="margin-right: 5px;"></i>
+                                    <span>UK</span>
+                                </figure>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <figure class="d-flex align-items-center">
+                                    <i class="flag-icon flag-icon-fr" style="margin-right: 5px;"></i>
+                                    <span>FRANCE</span>
+                                </figure>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <figure class="d-flex align-items-center">
+                                    <i class="flag-icon flag-icon-th" style="margin-right: 5px;"></i>
+                                    <span>THAILAND</span>
+                                </figure>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex py-3 container">
+                <input type="text" type="search" id="searchInput" class="form-control w-25 mx-2" placeholder="Country to search" />
+            </div>
+        </nav>
+    </header>
+
+    <section id="container"></section>
+    <div class="container m-5">
+        <div class="row" id="content"></div>
+    </div>
+
+    
+</body>
+</html>
