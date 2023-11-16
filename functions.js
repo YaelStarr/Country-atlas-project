@@ -1,4 +1,3 @@
-const API_KEY = '40f1a46ed54a672eca5b0bc2efd81f88';
 const baseUrl = 'https://restcountries.com/v3.1';
 
 
@@ -7,7 +6,7 @@ const baseUrl = 'https://restcountries.com/v3.1';
 const getCountry = async (country = "Israel") => {
     try {
         //const res = await axios.get(`${baseUrl}/name/${country}/`);
-        const res = await axios.get(`${baseUrl}/name/${country}?fields=name,capital,currencies,flags,population,region`);
+        const res = await axios.get(`${baseUrl}/name/${country}?fields=name,capital,currencies,flags,population,region,cca3,languages,latlng,maps`);
         console.log(res.data);
         return res.data;
     } catch (error) {
@@ -27,4 +26,3 @@ const searchCountry = (event) => {
     const Country = event.target.value;
     console.log(Country);
 };
-
