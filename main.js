@@ -1,93 +1,115 @@
-import { getCountry } from "./functions.js";
+import { getCountry, getStateByCode, getAllStates } from "./functions.js";
+const countriesArr = ["USA", "Israel", "United Kingdom", "France", "Thailand"];
+//getCountry();
 
-getCountry();
-
-const loadCountryInfo = () => {
-    console.log("444");
-};
-
-
-//const contentHolder = document.getElementById("content");
 
 const createColCard = (obj) => {
     const colEl = document.createElement("div");
-    colEl.className = "col-md-4 p-1";
+    colEl.className = "col-md-5 col-lg-4 p-2";
     const cardEl = document.createElement("div");
-    cardEl.className = "card p-2 shadow d-flex flex-column align-items-center m-5";
+    cardEl.className = "card p-2 shadow d-flex flex-column align-items-center m-sm-3 m-lg-5" ;
     cardEl.innerHTML = `
-      <img class="w-100"
+      <img class="w-100" height="45%"
       src="${obj.flags.png}" alt="${obj.flags.alt}" />
       <h4 class="display-6 align-self-start">${obj.name.common}</h4>
       <p>population: ${obj.population}</p>
       <p>region: ${obj.region}</p>
-      <button type="button" id="infoBtn" class="btn btn-primary">more information</button>
-      
+      <button type="button" id="infoBtn" class="btn btn-primary">more information</button> 
       `;
 
-      const infoBtn = cardEl.querySelector("#infoBtn");  
-      infoBtn.addEventListener("click", () => {
-        loadCountryInfo();
-      });
+    const infoBtn = cardEl.querySelector("#infoBtn");
+    infoBtn.addEventListener("click", () => {
+        loadCountryInfo(obj);
+    });
     colEl.append(cardEl);
     return colEl;
 };
 
 const addContentToDOM = (holder, content) => holder.append(content);
 
-const render = async (country = 'Israel', holder = content) => {
+const render = async (country = 'Israel', holder = main, clean = true) => {
     const data = await getCountry(country);
     console.log(data);
-    holder.innerHTML = "";
-    addContentToDOM(holder, createColCard(data[0]));
+    if (clean) holder.innerHTML = "";
+    //addContentToDOM(holder, createColCard(data[0]));
+    data.map((item) => addContentToDOM(holder, createColCard(item)));
 };
 
 
-// input and click on search
-render();
-
-
-//const contentMainHolder = document.getElementById("main");
-
 const createMain = (obj) => {
     const section = document.createElement("section");
-    section.className = "d-flex justify-content-around col-10 bg-danger";
+    section.className = "p-4 col-lg-4 col-xs-10 ";
     const article = document.createElement("article");
-    article.className = "col-4 m-5";
+    article.className = "col-10 m-4";
     const flagImg = document.createElement("div");
-    const map = document.createElement("div");
+    const borderStates = document.createElement("div");
+    borderStates.className = "row d-flex justify-content-center";
+    borderStates.id = "border_id";
+
     article.innerHTML = `
     <h1>${obj.name.common}</h1>
     <h4>population: ${obj.population}</h4>
     <h4>region: ${obj.region}</h4>
     <h4>language: ${Object.values(obj.languages).join(', ')}</h4>
     <h4> capital: ${(obj.capital)}</h4>
+    <h4> currencies: ${Object.values(obj.currencies)[0]['name']}, symbol: ${Object.values(obj.currencies)[0]['symbol']}</h4>
     <img class="w-100 mt-5" src="${obj.flags.png}" alt="${obj.flags.alt}" />
     `
-    //flagImg.innerHTML = `<img class="w-100" src="${obj.flags.png}" alt="${obj.flags.alt}" />`;
-    map.innerHTML = `<iframe  width="100%" height="500px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-    src="https://maps.google.com/maps?q=${obj.latlng[0]},${obj.latlng[1]}&hl=iw&z=14&amp;output=embed">
-    </iframe>`;
-    
-    //section.append(flagImg);
+    const borders = obj.borders;
+    if (borders) {
+        borders.forEach(async (element) => {
+            const state = await getStateByCode(element);
+            const stateName = state.name.common;
+            const btn = document.createElement("button");
+            btn.className = "btn btn-dark col-11 m-1";
+            btn.innerHTML = `${stateName}`;
+            borderStates.append(btn);
+            btn.addEventListener("click", () => {
+                try {
+                    render(stateName, main);
+                } catch (error) { }
+            });
+        });
+    } else { borderStates.innerHTML += "none" };
+
+
     section.append(article);
-    section.append(map);
+    section.append(borderStates);
     return section;
 };
+
+const createMap = (obj) => {
+    const map = document.createElement("div");
+    map.className = "map col-lg-5 col-xs-10 p-0"
+    map.innerHTML = `<iframe class="col-12 w-100"  height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+    src="https://maps.google.com/maps?q=${obj.latlng[0]},${obj.latlng[1]}&hl=iw&z=7&amp;output=embed">
+    </iframe>`;
+    return map;
+}
+
 
 const renderAllInfo = async (country = 'Israel', holder = main) => {
     const data = await getCountry(country);
     console.log(data);
     holder.innerHTML = "";
     addContentToDOM(holder, createMain(data[0]));
+    addContentToDOM(holder, createMap(data[0]));
 };
 
 
-renderAllInfo();
+const loadCountryInfo = (data) => {
+    renderAllInfo(data.name.common, main);
+    console.log(data);
+};
 
 
 
+const renderHome = async (countries = countriesArr, holder = main) => {
+    holder.innerHTML = "";
+    countries.map((country) => render(country, main, false))
+};
 
-
+renderHome();
 
 
 
@@ -97,32 +119,41 @@ const searchCountry = (event) => {
     try {
         const country = event.target.value;
         console.log(country);
-        render(country, content);
+        render(country, main);
     } catch (error) { }
 };
 
-// render(contentHolder, products);
 searchInput.addEventListener("input", searchCountry);
-//infoBtn.addEventListener("click", loadCountryInfo);
 
-//this.languages = Object.keys(item.languages);
-//<strong>Languages:</strong> ${Object.values(countryData[0].languages).join(' ')}<br>
+const populateSelect = async () => {
+    const countryNames = await getAllStates();
+    console.log(countryNames);
+    const select = document.getElementById("countrySelect");
+    select.innerHTML = "";
+
+    countryNames.forEach((country) => {
+        const option = document.createElement("option");
+        option.value = country.name.common;
+        option.text = country.name.common;
+        select.appendChild(option);
+    });
+};
+
+populateSelect();
+
+document.getElementById("countrySelect").addEventListener("change", (event) => {
+    const selectedCountry = event.target.value;
+    render(selectedCountry, main);
+});
 
 
-// this.render = () => {   
-//     let input= document.createElement("input");
-//     input.addEventListener("click", checkChange);
-//     input.type="checkbox";
-//     let article= document.createElement("article");
-//     article.addEventListener("dragstart", dragstart);
-//     article.addEventListener("dragend", dragend);
-//     article.innerHTML += `<h5>${this.title}</h5>
-//     <p>${this.dueDates}</p>
-//     <label for="${this.id}">is Completed</label><br>`;
-//     article.append(input);
-//     return article;
-// };
-// };
-// הורדתי כמה שורות לא רלוונטיות
-// וקראתי לרנדר ככה:
-// container.append(current.render());
+const stateLinks = document.querySelectorAll(".state");
+
+stateLinks.forEach((stateLink) => {
+    stateLink.addEventListener("click", (event) => {
+        console.log(event.currentTarget.id);
+        const state = countriesArr[(event.currentTarget.id)*1];
+        render(state, main);
+    });
+});
+

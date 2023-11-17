@@ -1,0 +1,91 @@
+body {
+    min-height: 900px;
+    background-color: black;
+    background-image: url("https://media.istockphoto.com/id/1442849073/photo/the-earth-space-planet-3d-illustration-background-city-lights-on-planet.webp?s=2048x2048&w=is&k=20&c=uOBRg2CaHH3pwifbcN-PICVlNug6RDaiBz5ouUSBgWc=");
+    /* background-image: url("https://images.pexels.com/photos/1249525/pexels-photo-1249525.jpeg?auto=compress&cs=tinysrgb&w=600"); */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav {
+    min-height: 80px;
+    background: rgba(10, 10, 10, 0.818) !important;
+}
+
+header nav ul li a {
+    color: white !important;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav a::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0%;
+    background: white;
+    transition: 1000ms;
+    margin: 0 auto;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a::before {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0%;
+    background: white;
+    transition: 1000ms;
+    margin: 0 auto;
+}
+
+nav a:hover::before {
+    width: 100%;
+}
+
+
+@media screen and (max-width: 426px) {
+
+    nav {
+        background: rgba(249, 248, 251, 0.763);
+    }
+}
+
+
+footer {
+    min-height: 30px;
+    color: white;
+    background: rgba(20, 20, 20, 0.516);
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.social-media i {
+    color: white;
+}
+
+.map iframe {
+    border-radius: 0px 10px 10px 0px;
+}
+
+section {
+    border-radius: 10px 0 0 10px;
+    background-color: rgba(245, 245, 220, 0.692) !important;
+}
+
+.card {
+    height: 400px !important;
+}

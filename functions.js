@@ -6,23 +6,36 @@ const baseUrl = 'https://restcountries.com/v3.1';
 const getCountry = async (country = "Israel") => {
     try {
         //const res = await axios.get(`${baseUrl}/name/${country}/`);
-        const res = await axios.get(`${baseUrl}/name/${country}?fields=name,capital,currencies,flags,population,region,cca3,languages,latlng,maps`);
-        console.log(res.data);
+        const res = await axios.get(`${baseUrl}/name/${country}?fields=name,capital,currencies,flags,population,region,cca3,languages,latlng,maps,borders`);
+        console.log("res"+res.data);
         return res.data;
     } catch (error) {
         console.log(error);
     }
 };
 
-getCountry();
 
-export { getCountry };
-
-
-
-
-
-const searchCountry = (event) => {
-    const Country = event.target.value;
-    console.log(Country);
+const getStateByCode = async (country = "Israel") => {
+    try {
+        const res = await axios.get(`${baseUrl}/alpha/${country}?fields=name,capital,currencies,flags,population,region,cca3,languages,latlng,maps,borders`);
+        console.log("res"+res.data);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
 };
+
+const getAllStates = async () => {
+    try {
+       ;
+        const res = await axios.get(`${baseUrl}/all?fields=name`);
+        console.log("res"+res.data);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+export { getCountry, getStateByCode, getAllStates };
+

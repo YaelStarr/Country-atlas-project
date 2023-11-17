@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" /> 
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" />
+
+    <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top p-0 bg-dark">
+        <nav class="navbar navbar-expand-lg fixed-top p-0">
             <div class="container-fluid">
-                <img src="https://cdn-icons-png.flaticon.com/128/477/477702.png" alt="logo" width="70px">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <img class="ms-2 me-5" src="https://cdn-icons-png.flaticon.com/128/486/486505.png" alt="logo" width="70px">
+                <button class="navbar-toggler border-danger text-light" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon "></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
+                            <a class="nav-link state"  href="#" id="0">
                                 <figure class="d-flex align-items-center">
                                     <i class="flag-icon flag-icon-us" style="margin-right: 5px;"></i>
                                     <span>USA</span>
@@ -33,7 +41,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link state" href="#" id="1">
                                 <figure class="d-flex align-items-center">
                                     <i class="flag-icon flag-icon-il" style="margin-right: 5px;"></i>
                                     <span>ISRAEL</span>
@@ -41,15 +49,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link state" href="#" id="2">
                                 <figure class="d-flex align-items-center">
                                     <i class="flag-icon flag-icon-gb" style="margin-right: 5px;"></i>
-                                    <span>UK</span>
+                                    <span >UK</span>
                                 </figure>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link state" href="#" id="3">
                                 <figure class="d-flex align-items-center">
                                     <i class="flag-icon flag-icon-fr" style="margin-right: 5px;"></i>
                                     <span>FRANCE</span>
@@ -58,19 +66,29 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link state" href="#" id="4">
                                 <figure class="d-flex align-items-center">
                                     <i class="flag-icon flag-icon-th" style="margin-right: 5px;"></i>
                                     <span>THAILAND</span>
                                 </figure>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <div class="m-1">
+                                <input type="text" type="search" id="searchInput" class="form-control w-75 mx-2"
+                                    placeholder="Country to search" />
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <select class="form-select m-1" id="countrySelect" class="form-select">
+                                <!-- Options will be dynamically added here -->
+                              </select>
+                        </li>
                     </ul>
                 </div>
+
             </div>
-            <div class="d-flex py-3 container">
-                <input type="text" type="search" id="searchInput" class="form-control w-25 mx-2" placeholder="Country to search" />
-            </div>
+
         </nav>
     </header>
 
@@ -83,31 +101,34 @@
     </div>
 
 
+
+    <div class="container d-flex justify-content-center">
+        <main id="main" class="col-12 row d-flex justify-content-center m-4 mb-5"></main>
     </div>
 
-    <main id="main" class="d-flex justify-content-center">
-</main> 
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="countryModal" tabindex="-1" aria-labelledby="countryModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="countryModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    
+    <footer class="container-fluid center">
+        <div class="container">
+            Yael Starr | Full Stack | developer | 2023
         </div>
-        <div class="modal-body" id="modalBody">
-          ...
+        <div class="social-media">
+            <a href="#">
+                <i class="fab fa-facebook-f" style="margin-right: 5px;"></i>
+            </a>
+            <a href="#">
+                <i class="fab fa-twitter" style="margin-right: 5px;"></i>
+            </a>
+            <a href="#">
+                <i class="fab fa-instagram" style="margin-right: 5px;"></i>
+            </a>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>   
+    </footer>
 
-  
-  <script src="main.js" type="module" defer></script>
+    <script src="main.js" type="module" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
+
 </html>
