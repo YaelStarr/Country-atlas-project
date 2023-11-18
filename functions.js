@@ -5,7 +5,7 @@ const baseUrl = 'https://restcountries.com/v3.1';
 
 const getCountry = async (country = "Israel") => {
     try {
-        //const res = await axios.get(`${baseUrl}/name/${country}/`);
+        if(country ==="United States") country="USA";
         const res = await axios.get(`${baseUrl}/name/${country}?fields=name,capital,currencies,flags,population,region,cca3,languages,latlng,maps,borders`);
         return res.data;
     } catch (error) {
