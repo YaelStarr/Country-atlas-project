@@ -1,13 +1,14 @@
 import { getCountry, getStateByCode, getAllStates } from "./functions.js";
 const countriesArr = ["USA", "Israel", "United Kingdom", "France", "Thailand"];
-//getCountry();
 
 
 const createColCard = (obj) => {
     const colEl = document.createElement("div");
     colEl.className = "col-md-5 col-lg-4 p-2";
+    colEl.setAttribute("data-aos", "fade-up");
+    colEl.setAttribute("data-aos-duration", "2000");
     const cardEl = document.createElement("div");
-    cardEl.className = "card p-2 shadow d-flex flex-column align-items-center m-sm-3 m-lg-5" ;
+    cardEl.className = "card p-2 shadow d-flex flex-column align-items-center m-sm-3 m-lg-5";
     cardEl.innerHTML = `
       <img class="w-100" height="45%"
       src="${obj.flags.png}" alt="${obj.flags.alt}" />
@@ -29,7 +30,6 @@ const addContentToDOM = (holder, content) => holder.append(content);
 
 const render = async (country = 'Israel', holder = main, clean = true) => {
     const data = await getCountry(country);
-    console.log(data);
     if (clean) holder.innerHTML = "";
     //addContentToDOM(holder, createColCard(data[0]));
     data.map((item) => addContentToDOM(holder, createColCard(item)));
@@ -39,6 +39,8 @@ const render = async (country = 'Israel', holder = main, clean = true) => {
 const createMain = (obj) => {
     const section = document.createElement("section");
     section.className = "p-4 col-lg-4 col-xs-10 ";
+    section.setAttribute("data-aos", "fade-down");
+    section.setAttribute("data-aos-duration", "2000");
     const article = document.createElement("article");
     article.className = "col-10 m-4";
     const flagImg = document.createElement("div");
@@ -81,6 +83,8 @@ const createMain = (obj) => {
 const createMap = (obj) => {
     const map = document.createElement("div");
     map.className = "map col-lg-5 col-xs-10 p-0"
+    map.setAttribute("data-aos", "fade-down");
+    map.setAttribute("data-aos-duration", "2000");
     map.innerHTML = `<iframe class="col-12 w-100"  height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
     src="https://maps.google.com/maps?q=${obj.latlng[0]},${obj.latlng[1]}&hl=iw&z=7&amp;output=embed">
     </iframe>`;
@@ -90,7 +94,6 @@ const createMap = (obj) => {
 
 const renderAllInfo = async (country = 'Israel', holder = main) => {
     const data = await getCountry(country);
-    console.log(data);
     holder.innerHTML = "";
     addContentToDOM(holder, createMain(data[0]));
     addContentToDOM(holder, createMap(data[0]));
@@ -99,7 +102,6 @@ const renderAllInfo = async (country = 'Israel', holder = main) => {
 
 const loadCountryInfo = (data) => {
     renderAllInfo(data.name.common, main);
-    console.log(data);
 };
 
 
@@ -118,7 +120,6 @@ renderHome();
 const searchCountry = (event) => {
     try {
         const country = event.target.value;
-        console.log(country);
         render(country, main);
     } catch (error) { }
 };
@@ -127,7 +128,6 @@ searchInput.addEventListener("input", searchCountry);
 
 const populateSelect = async () => {
     const countryNames = await getAllStates();
-    console.log(countryNames);
     const select = document.getElementById("countrySelect");
     select.innerHTML = "";
 
@@ -151,9 +151,11 @@ const stateLinks = document.querySelectorAll(".state");
 
 stateLinks.forEach((stateLink) => {
     stateLink.addEventListener("click", (event) => {
-        console.log(event.currentTarget.id);
-        const state = countriesArr[(event.currentTarget.id)*1];
+        const state = countriesArr[(event.currentTarget.id) * 1];
         render(state, main);
     });
 });
 
+const home = document.getElementById("home");
+
+home.addEventListener("click", (event) => {renderHome(countriesArr, main)});

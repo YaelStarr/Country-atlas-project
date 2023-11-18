@@ -18,13 +18,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" />
 
     <link rel="stylesheet" href="index.css">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg fixed-top p-0">
             <div class="container-fluid">
-                <img class="ms-2 me-5" src="https://cdn-icons-png.flaticon.com/128/486/486505.png" alt="logo" width="70px">
+                <img class="ms-2 me-5" src="https://cdn-icons-png.flaticon.com/128/486/486505.png" alt="logo"
+                    width="70px">
                 <button class="navbar-toggler border-danger text-light" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +36,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link state"  href="#" id="0">
+                            <a class="nav-link" id="home" href="#">
+                                <span>HOME</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link state" href="#" id="0">
                                 <figure class="d-flex align-items-center">
                                     <i class="flag-icon flag-icon-us" style="margin-right: 5px;"></i>
                                     <span>USA</span>
@@ -52,7 +60,7 @@
                             <a class="nav-link state" href="#" id="2">
                                 <figure class="d-flex align-items-center">
                                     <i class="flag-icon flag-icon-gb" style="margin-right: 5px;"></i>
-                                    <span >UK</span>
+                                    <span>UK</span>
                                 </figure>
                             </a>
                         </li>
@@ -82,7 +90,7 @@
                         <li class="nav-item">
                             <select class="form-select m-1" id="countrySelect" class="form-select">
                                 <!-- Options will be dynamically added here -->
-                              </select>
+                            </select>
                         </li>
                     </ul>
                 </div>
@@ -106,7 +114,7 @@
         <main id="main" class="col-12 row d-flex justify-content-center m-4 mb-5"></main>
     </div>
 
-    
+
     <footer class="container-fluid center">
         <div class="container">
             Yael Starr | Full Stack | developer | 2023
